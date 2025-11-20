@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: arb-live-bot
+    env: docker
+    region: oregon
+    plan: starter
+    autoDeploy: true
+    envVars:
+      ETHEREUM_RPC_URL:
+        sync: false
+      PRIVATE_KEY:
+        sync: false
