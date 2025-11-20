@@ -1,0 +1,30 @@
+# hummingbot.yml
+# Strategy: LIVE Flash Loan Arbitrage on Arbitrum
+# Version: 2.0 (Production Ready)
+
+strategy: flashloan_arbitrage
+paper_trade: false
+
+# --- Core Connections (Set via Render Env Vars) ---
+chain_id: 42161
+
+# --- Flash Loan Provider (Aave V3 on Arbitrum) ---
+flash_loan_provider: aave_v3_arbitrum
+min_loan_amount: 200000
+max_loan_amount: 6000000
+
+# --- Arbitrage Strategy ---
+market_pairs:
+  - camelot.uniswap_v3_arbitrum.WETH-USDC
+  - camelot.sushiswap_arbitrum.WETH-USDC
+  - camelot.uniswap_v3_arbitrum.ARB-USDC
+  - uniswap_v3_arbitrum.sushiswap_arbitrum.WBTC-WETH
+  - camelot.uniswap_v3_arbitrum.GMX-USDC
+
+min_profitability_threshold: 0.0008
+include_gas_in_profitability: true
+scan_interval: 2
+max_concurrent_loans: 3
+
+# --- Logging ---
+log_level: INFO
