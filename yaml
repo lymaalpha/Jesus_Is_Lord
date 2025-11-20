@@ -1,0 +1,20 @@
+strategy: flashloan_arbitrage
+ethereum_rpc_url: "${ETHEREUM_RPC_URL}"
+chain_id: 42161
+paper_trade: false
+
+flash_loan_provider: aave_v3_arbitrum
+min_loan_amount: 250000
+max_loan_amount: 8000000
+
+market_pairs:
+  - camelot_v3_arbitrum.uniswap_v3_arbitrum.WETH-USDC
+  - camelot_v3_arbitrum.sushiswap_arbitrum.WETH-USDC
+  - camelot_v3_arbitrum.uniswap_v3_arbitrum.ARB-USDC
+  - uniswap_v3_arbitrum.sushiswap_arbitrum.WBTC-WETH
+  - camelot_v3_arbitrum.uniswap_v3_arbitrum.GMX-USDC
+
+min_profitability_threshold: 0.0008
+include_gas_in_profitability: true
+scan_interval: 1.5
+max_concurrent_loans: 4
