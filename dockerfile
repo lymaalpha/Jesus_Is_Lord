@@ -1,13 +1,8 @@
 FROM hummingbot/hummingbot:latest
 
-# Copy config (rename to standard name if not already)
-COPY conf/flashloan_arbitrage.yml /conf/flashloan_arbitrage.yml
+# Copy script + config
+COPY scripts/flashloan_arbitrage.py /scripts/flashloan_arbitrage.py
+COPY conf/flashloan_arbitrage.yml /conf/flashloan_arbitrage.yml   # optional, can be empty
 
-# Set working dir
 WORKDIR /home/hummingbot
-
-# Headless start with loop to prevent exit
-CMD ["bash", "-c", "\
-     ./start --no-prompt --import-private-key ${PRIVATE_KEY} --rpc-url ${ETHEREUM_RPC_URL} --network arbitrum && \
-     hummingbot start --script flashloan_arbitrage --conf flashloan_arbitrage.yml && \
-     tail -f /dev/null"]
+CMD ["bash", "-c", "sleep 10 && ./start --script flashloan_arbitrage.py --no-prompt"]
