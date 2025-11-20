@@ -1,13 +1,13 @@
 FROM hummingbot/hummingbot:latest
 
-# Copy our config
+# Copy config (rename to standard name if not already)
 COPY conf/flashloan_arbitrage.yml /conf/flashloan_arbitrage.yml
 
-# Switch to the correct directory
+# Set working dir
 WORKDIR /home/hummingbot
 
-# The only CMD that works reliably on Render background workers in Nov 2025
+# Headless start with loop to prevent exit
 CMD ["bash", "-c", "\
-     sleep 8 && \
-     echo 'y' | python3 -m hummingbot.client quickstart --script flashloan_arbitrage --script-config flashloan_arbitrage.yml \
-     "]
+     ./start --no-prompt --import-private-key ${PRIVATE_KEY} --rpc-url ${ETHEREUM_RPC_URL} --network arbitrum && \
+     hummingbot start --script flashloan_arbitrage --conf flashloan_arbitrage.yml && \
+     tail -f /dev/null"]
